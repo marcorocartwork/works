@@ -1,0 +1,416 @@
+import { useState } from "react";
+import { Menu, X, Instagram, Linkedin, Mail } from "lucide-react";
+import { motion } from "motion/react";
+import * as Dialog from "@radix-ui/react-dialog";
+
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
+  const projects = [
+    {
+      title: "Imperfeito Restaurant",
+      category: "Branding",
+      image: "https://images.unsplash.com/photo-1765646772493-7b5341714eea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      description: "Complete brand identity for a contemporary Portuguese restaurant"
+    },
+    {
+      title: "Madeira Water Taxi",
+      category: "Visual Identity",
+      image: "https://images.unsplash.com/photo-1635181738094-f82aee7b0aa7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      description: "Maritime service brand with ocean-inspired aesthetics"
+    },
+    {
+      title: "Nostalgic Madeira Music",
+      category: "Creative Campaign",
+      image: "https://images.unsplash.com/photo-1778084401191-ab88bf8d5612?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      description: "Visual campaign celebrating island culture through music"
+    },
+    {
+      title: "BLACKDOG Creative",
+      category: "Studio Branding",
+      image: "https://images.unsplash.com/photo-1765371515218-0a4c992ba8e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      description: "Bold identity for an innovative creative studio"
+    },
+    {
+      title: "Editorial Campaigns",
+      category: "Art Direction",
+      image: "https://images.unsplash.com/photo-1768471126011-2e2002832826?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      description: "Series of editorial layouts for various creative clients"
+    }
+  ];
+
+  const experience = [
+    {
+      year: "2023 — Present",
+      role: "Creative Director",
+      company: "Independent Studio",
+      description: "Leading creative direction for international brands"
+    },
+    {
+      year: "2020 — 2023",
+      role: "Senior Graphic Designer",
+      company: "Studio Collective",
+      description: "Brand identity and visual campaigns"
+    },
+    {
+      year: "2018 — 2020",
+      role: "Graphic Designer",
+      company: "Creative Agency",
+      description: "Digital and print design for diverse clients"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-background text-foreground antialiased">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-6 md:px-12 md:py-8">
+        <div className="max-w-[1800px] mx-auto flex justify-between items-center">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-sm tracking-wider uppercase text-muted-foreground"
+          >
+            Marco Rocha
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="hidden md:flex gap-8 text-sm tracking-wide"
+          >
+            <a href="#work" className="hover:text-primary transition-colors">Work</a>
+            <a href="#about" className="hover:text-primary transition-colors">About</a>
+            <button onClick={() => setIsResumeOpen(true)} className="hover:text-primary transition-colors">Resume</button>
+            <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+          </motion.div>
+
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-foreground"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-40 bg-background md:hidden flex flex-col items-center justify-center gap-8 text-2xl"
+        >
+          <a href="#work" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">Work</a>
+          <a href="#about" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">About</a>
+          <button onClick={() => { setIsResumeOpen(true); setIsMenuOpen(false); }} className="hover:text-primary transition-colors">Resume</button>
+          <a href="#contact" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">Contact</a>
+        </motion.div>
+      )}
+
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center px-6 md:px-12 relative overflow-hidden">
+        <div className="max-w-[1800px] w-full mx-auto grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h1 className="text-[12vw] md:text-[8vw] lg:text-[10rem] font-black tracking-tighter leading-none mb-6">
+              MARCO
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 tracking-wide">
+              Graphic Designer & Creative Director
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground max-w-md mb-12 leading-relaxed">
+              Crafting visual narratives that bridge tradition and innovation.
+              Specializing in brand identities that resonate across cultures.
+            </p>
+            <div className="flex gap-4">
+              <a
+                href="#work"
+                className="px-8 py-4 bg-primary text-primary-foreground hover:bg-primary/90 transition-all text-sm tracking-wider uppercase"
+              >
+                View Work
+              </a>
+              <a
+                href="#contact"
+                className="px-8 py-4 border border-border hover:bg-accent transition-all text-sm tracking-wider uppercase"
+              >
+                Get in Touch
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/50 z-10" />
+            <img
+              src="https://images.unsplash.com/photo-1635380242039-c49af5c18756?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+              alt="Marco Rocha"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Portfolio Section */}
+      <section id="work" className="py-24 md:py-32 px-6 md:px-12">
+        <div className="max-w-[1800px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 md:mb-24"
+          >
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-4">
+              Selected Work
+            </h2>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
+              A curated collection of brand identities, creative campaigns, and visual storytelling projects.
+            </p>
+          </motion.div>
+
+          <div className="grid gap-12 md:gap-20">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div className={`${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                    <div className="aspect-[4/3] overflow-hidden relative">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
+                  </div>
+                  <div className={`${index % 2 === 1 ? 'md:order-1' : ''} md:px-8`}>
+                    <p className="text-sm tracking-widest uppercase text-muted-foreground mb-4">
+                      {project.category}
+                    </p>
+                    <h3 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+                      {project.title}
+                    </h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 md:py-32 px-6 md:px-12 bg-accent">
+        <div className="max-w-[1800px] mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="aspect-[3/4] overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1485921040253-3601b55d50aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+                alt="About Marco"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">
+                About
+              </h2>
+              <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+                <p>
+                  Based in Madeira, I create visual identities and campaigns that tell
+                  compelling stories. With over 8 years of experience, I've worked with
+                  clients across hospitality, culture, and creative industries.
+                </p>
+                <p>
+                  My approach combines strategic thinking with meticulous craft,
+                  resulting in work that's both conceptually strong and beautifully
+                  executed.
+                </p>
+              </div>
+
+              <div className="mt-12">
+                <h3 className="text-2xl font-bold mb-6">Expertise</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    "Branding",
+                    "UI/UX Design",
+                    "Creative Direction",
+                    "Visual Storytelling",
+                    "Social Media Design",
+                    "Art Direction"
+                  ].map((skill, index) => (
+                    <div
+                      key={index}
+                      className="px-4 py-3 border border-border text-sm tracking-wide"
+                    >
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 md:py-32 px-6 md:px-12">
+        <div className="max-w-[1800px] mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter mb-8">
+              Let's Create
+            </h2>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-16 max-w-2xl mx-auto">
+              Available for select projects. Let's discuss how we can work together.
+            </p>
+
+            <div className="flex justify-center gap-8 mb-20">
+              <a
+                href="mailto:hello@marcorocha.com"
+                className="px-10 py-5 bg-primary text-primary-foreground hover:bg-primary/90 transition-all text-sm tracking-widest uppercase"
+              >
+                Start a Project
+              </a>
+            </div>
+
+            <div className="flex justify-center gap-8 pt-12 border-t border-border">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                <Instagram size={24} />
+              </a>
+              <a
+                href="https://behance.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.5 4.5h3.8c1.3 0 2.4.3 3.2 1 .8.6 1.2 1.6 1.2 2.8 0 1-.3 1.8-.8 2.3-.5.6-1.2.9-2 1.1v.1c1 .1 1.8.5 2.4 1.2.6.7.9 1.5.9 2.6 0 1.3-.5 2.4-1.4 3.1-.9.7-2.1 1.1-3.7 1.1H6.5V4.5zm2.2 5.4h2.2c.7 0 1.3-.2 1.7-.5.4-.3.6-.8.6-1.4 0-.7-.2-1.2-.6-1.5-.4-.3-1-.5-1.7-.5H8.7v3.9zm0 6.7h2.5c.8 0 1.4-.2 1.8-.6.4-.4.6-.9.6-1.6 0-.7-.2-1.2-.7-1.6-.5-.4-1.1-.6-1.9-.6H8.7v4.4zM16.5 7h5v1.5h-5V7z"/>
+                </svg>
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                <Linkedin size={24} />
+              </a>
+              <a
+                href="mailto:hello@marcorocha.com"
+                className="hover:text-primary transition-colors"
+              >
+                <Mail size={24} />
+              </a>
+            </div>
+
+            <p className="text-sm text-muted-foreground mt-12">
+              © 2026 Marco Rocha. All rights reserved.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Resume Modal */}
+      <Dialog.Root open={isResumeOpen} onOpenChange={setIsResumeOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-background/95 backdrop-blur-sm z-50" />
+          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-card border border-border p-8 md:p-12">
+            <Dialog.Close className="absolute top-6 right-6 text-muted-foreground hover:text-foreground transition-colors">
+              <X size={24} />
+            </Dialog.Close>
+
+            <Dialog.Title className="text-4xl md:text-5xl font-black tracking-tighter mb-8">
+              Resume
+            </Dialog.Title>
+
+            <div className="space-y-12">
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Experience</h3>
+                <div className="space-y-8">
+                  {experience.map((exp, index) => (
+                    <div key={index} className="border-l-2 border-primary pl-6">
+                      <p className="text-sm text-muted-foreground mb-2">{exp.year}</p>
+                      <h4 className="text-xl font-bold mb-1">{exp.role}</h4>
+                      <p className="text-lg text-muted-foreground mb-2">{exp.company}</p>
+                      <p className="text-muted-foreground">{exp.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Education</h3>
+                <div className="border-l-2 border-primary pl-6">
+                  <p className="text-sm text-muted-foreground mb-2">2014 — 2018</p>
+                  <h4 className="text-xl font-bold mb-1">BA Graphic Design</h4>
+                  <p className="text-lg text-muted-foreground">University of Arts</p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Awards & Recognition</h3>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-bold">D&AD Award</p>
+                      <p className="text-muted-foreground">Brand Identity</p>
+                    </div>
+                    <p className="text-muted-foreground">2024</p>
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-bold">Communication Arts</p>
+                      <p className="text-muted-foreground">Design Annual</p>
+                    </div>
+                    <p className="text-muted-foreground">2023</p>
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-bold">Red Dot Award</p>
+                      <p className="text-muted-foreground">Communication Design</p>
+                    </div>
+                    <p className="text-muted-foreground">2022</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </div>
+  );
+}
